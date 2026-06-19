@@ -7,3 +7,4 @@ zcompcache/
 *.swo
 *~
 tmux/.config/tmux/plugins/
+yt-dlp/.config/yt-dlp/*_cookies.txt

@@ -1,0 +1,8 @@
+--windows-filenames
+--write-description
+--cookies $XDG_CONFIG_HOME/yt-dlp/www.youtube.com_cookies.txt
+--write-thumbnail
+--write-subs
+--embed-thumbnail
+--embed-subs
+--embed-metadata

@@ -35,7 +35,7 @@ install_stow() {
   esac
 }
 
-COMMON_PACKAGES=(zsh sheldon git ssh ghostty tmux)
+COMMON_PACKAGES=(zsh sheldon git ssh ghostty tmux ccstatusline yt-dlp husky)
 MACOS_PACKAGES=(cmux karabiner)
 
 stow_packages() {
