@@ -1,0 +1,9 @@
+*.zwc
+.zcompdump*
+zcompcache/
+.DS_Store
+._*
+*.swp
+*.swo
+*~
+tmux/.config/tmux/plugins/
