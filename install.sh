@@ -93,7 +93,13 @@ install_prerequisites_linux() {
   # deno
   if ! has deno; then
     info "Installing deno..."
-    curl -fsSL https://deno.land/install.sh | sh
+    curl -fsSL https://deno.land/install.sh | DENO_INSTALL="$HOME/.deno" sh
+  fi
+
+  # pnpm
+  if ! has pnpm; then
+    info "Installing pnpm..."
+    curl -fsSL https://get.pnpm.io/install.sh | PNPM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm" SHELL=/dev/null sh
   fi
 }
 

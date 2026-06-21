@@ -20,9 +20,19 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 
+# deno
+export DENO_INSTALL="$HOME/.deno"
+case ":$PATH:" in
+  *":$DENO_INSTALL/bin:"*) ;;
+  *) export PATH="$DENO_INSTALL/bin:$PATH" ;;
+esac
+
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# deno completions
+source <(deno completions zsh)
 
 # uv (Python package and project manager)
 source <(uv generate-shell-completion zsh)
