@@ -26,7 +26,15 @@ apply = ["source"]
 inline = 'builtin source <(starship init zsh)'
 
 [plugins.fzf]
-inline = 'builtin source <(fzf --zsh)'
+inline = '''
+if [[ "$(fzf --version 2>/dev/null | cut -d. -f1-2)" > "0.47" ]]; then
+  builtin source <(fzf --zsh)
+else
+  # apt-packaged fzf (<0.48) ships shell integration as files
+  builtin source /usr/share/doc/fzf/examples/key-bindings.zsh
+  builtin source /usr/share/doc/fzf/examples/completion.zsh
+fi
+'''
 
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
