@@ -102,6 +102,7 @@ install_nvm() {
   local nvm_dir="${XDG_CONFIG_HOME:-$HOME/.config}/nvm"
   if [[ -s "$nvm_dir/nvm.sh" ]]; then return; fi
   info "Installing nvm..."
+  mkdir -p "$nvm_dir"
   export NVM_DIR="$nvm_dir"
   PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash'
 }
