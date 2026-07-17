@@ -1,17 +1,19 @@
 {
+  "env": {
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4-6[1m]"
+  },
   "permissions": {
     "defaultMode": "auto"
   },
   "model": "fable",
   "statusLine": {
     "type": "command",
-    "command": "ccstatusline",
+    "command": "bunx -y ccstatusline@latest",
     "padding": 0,
     "refreshInterval": 10
   },
   "enabledPlugins": {
-    "obsidian@obsidian-skills": true,
-    "swift-lsp@claude-plugins-official": true
+    "obsidian@obsidian-skills": true
   },
   "extraKnownMarketplaces": {
     "obsidian-skills": {
@@ -22,7 +24,12 @@
     }
   },
   "effortLevel": "high",
+  "skipWorkflowUsageWarning": true,
   "theme": "dark",
-  "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "editorMode": "normal",
+  "switchModelsOnFlag": true,
+  "fileCheckpointingEnabled": true,
+  "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true
 }
