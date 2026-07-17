@@ -7,6 +7,9 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 # Set ZDOTDIR to use XDG_CONFIG_HOME for zsh configuration
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 
+# Skip eager compinit in Ubuntu's /etc/zsh/zshrc (compinit is run in deferred.zsh)
+skip_global_compinit=1
+
 # Node (nvm) — non-interactive shell でも PATH を通す
 export NVM_DIR="$XDG_CONFIG_HOME"/nvm
 [ -d "$NVM_DIR/versions/node" ] && export PATH="$(ls -d "$NVM_DIR"/versions/node/*/bin 2>/dev/null | head -1):$PATH"

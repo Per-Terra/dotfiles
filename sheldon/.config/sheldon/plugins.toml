@@ -27,7 +27,8 @@ inline = 'builtin source <(starship init zsh)'
 
 [plugins.fzf]
 inline = '''
-if [[ "$(fzf --version 2>/dev/null | cut -d. -f1-2)" > "0.47" ]]; then
+autoload -Uz is-at-least
+if is-at-least 0.48 "$(fzf --version 2>/dev/null | cut -d' ' -f1)"; then
   builtin source <(fzf --zsh)
 else
   # apt-packaged fzf (<0.48) ships shell integration as files
@@ -39,6 +40,20 @@ fi
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
 
+[plugins.local]
+local = "~/.config/zsh"
+use = ["*.zsh", "!deferred.zsh"]
+apply = ["source"]
+
+# compinit を実行するため fzf-tab より先にロードする
+[plugins.local-deferred]
+local = "~/.config/zsh"
+use = ["deferred.zsh"]
+
+# fzf-tab は compinit の後、widget をラップするプラグインより前にロードする
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 use = ["{{ name }}.zsh"]
@@ -46,18 +61,9 @@ use = ["{{ name }}.zsh"]
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
 
-[plugins.fzf-tab]
-github = "Aloxaf/fzf-tab"
-
+# osascript/terminal-notifier を使うため macOS のみロードする
 [plugins.notify]
 github = "stepan-tikunov/zsh-notify"
 branch = "macos-terminals"
-
-[plugins.local]
-local = "~/.config/zsh"
-use = ["*.zsh", "!deferred.zsh"]
-apply = ["source"]
-
-[plugins.local-deferred]
-local = "~/.config/zsh"
-use = ["deferred.zsh"]
+hooks.pre = "if [[ $OSTYPE == darwin* ]]; then"
+hooks.post = "fi"

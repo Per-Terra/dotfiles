@@ -8,7 +8,6 @@ SAVEHIST=100000
 # History options
 setopt EXTENDED_HISTORY      # コマンドの開始時刻と実行時間を保存
 setopt HIST_IGNORE_ALL_DUPS  # 重複する古い履歴を削除
-setopt HIST_IGNORE_DUPS      # 直前と同じコマンドを履歴に保存しない
 setopt HIST_IGNORE_SPACE     # スペースで始まるコマンドを履歴に保存しない
 setopt HIST_REDUCE_BLANKS    # 連続する空白を1つにまとめる
 setopt HIST_VERIFY           # 履歴展開を含むコマンドは実行前に展開内容を表示

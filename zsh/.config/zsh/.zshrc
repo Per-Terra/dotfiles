@@ -1,4 +1,5 @@
 function source {
+  [[ -f "$1" ]] || { builtin source "$@"; return; }  # プロセス置換等はzcompile不可
   ensure_zcompiled $1
   builtin source $1
 }
@@ -25,3 +26,6 @@ zsh-defer unfunction source
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# Machine-specific settings (not tracked by git)
+[[ ! -f "$ZDOTDIR/.zshrc.local" ]] || source "$ZDOTDIR/.zshrc.local"
