@@ -36,7 +36,7 @@ install_prerequisites_linux() {
   info "Installing apt packages..."
   sudo apt-get update
   sudo apt-get install -y \
-    zsh git stow tmux fzf zoxide bat curl unzip
+    zsh git stow tmux fzf zoxide bat curl wget unzip
 
   # bat is named batcat on Ubuntu — create symlink
   if has batcat && ! has bat; then
@@ -84,6 +84,12 @@ install_prerequisites_linux() {
     curl -LsSf https://astral.sh/uv/install.sh | sh
   fi
 
+  # yt-dlp: config is stowed (COMMON_PACKAGES) so install the binary too
+  if ! has yt-dlp; then
+    info "Installing yt-dlp..."
+    PATH="$HOME/.local/bin:$PATH" uv tool install yt-dlp
+  fi
+
   # bun
   if ! has bun; then
     info "Installing bun..."
@@ -110,7 +116,7 @@ install_nvm() {
   info "Installing nvm..."
   mkdir -p "$nvm_dir"
   export NVM_DIR="$nvm_dir"
-  PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash'
+  PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.6/install.sh | bash'
 }
 
 # tmux plugin manager
@@ -125,7 +131,9 @@ install_tpm() {
 # Stow
 # ---------------------------------------------------------------------------
 
-COMMON_PACKAGES=(zsh sheldon git ssh ghostty tmux ccstatusline yt-dlp husky)
+# Note: "gh" is the stow package for GitHub CLI config (~/.config/gh/config.yml),
+# not the gh command itself (installed above via apt/brew).
+COMMON_PACKAGES=(zsh sheldon git ssh ghostty tmux ccstatusline yt-dlp husky claude gh)
 MACOS_PACKAGES=(cmux karabiner)
 
 stow_packages() {
