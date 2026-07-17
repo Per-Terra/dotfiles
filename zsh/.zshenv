@@ -14,6 +14,34 @@ skip_global_compinit=1
 export NVM_DIR="$XDG_CONFIG_HOME"/nvm
 [ -d "$NVM_DIR/versions/node" ] && export PATH="$(ls -d "$NVM_DIR"/versions/node/*/bin 2>/dev/null | head -1):$PATH"
 
+# 非対話シェルでも PATH を通す(重い初期化・補完は deferred.zsh で遅延読込み)
+# pnpm (Performant Node.js package manager)
+export PNPM_HOME="$XDG_DATA_HOME"/pnpm
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+
+# deno
+export DENO_INSTALL="$HOME/.deno"
+case ":$PATH:" in
+  *":$DENO_INSTALL/bin:"*) ;;
+  *) export PATH="$DENO_INSTALL/bin:$PATH" ;;
+esac
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+case ":$PATH:" in
+  *":$BUN_INSTALL/bin:"*) ;;
+  *) export PATH="$BUN_INSTALL/bin:$PATH" ;;
+esac
+
+# uv, sheldon, bat 等のバイナリ置き場
+case ":$PATH:" in
+  *":$HOME/.local/bin:"*) ;;
+  *) export PATH="$PATH:$HOME/.local/bin" ;;
+esac
+
 # Set SSH_AUTH_SOCK for Bitwarden SSH agent (macOS only)
 if [[ "$OSTYPE" == darwin* ]]; then
   export SSH_AUTH_SOCK="$HOME"/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock

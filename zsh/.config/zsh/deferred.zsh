@@ -16,27 +16,6 @@ nvm() {
   nvm "$@"
 }
 
-# pnpm (Performant Node.js package manager)
-export PNPM_HOME="$XDG_DATA_HOME"/pnpm
-case ":$PATH:" in
-  *":$PNPM_HOME/bin:"*) ;;
-  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
-esac
-
-# deno
-export DENO_INSTALL="$HOME/.deno"
-case ":$PATH:" in
-  *":$DENO_INSTALL/bin:"*) ;;
-  *) export PATH="$DENO_INSTALL/bin:$PATH" ;;
-esac
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-case ":$PATH:" in
-  *":$BUN_INSTALL/bin:"*) ;;
-  *) export PATH="$BUN_INSTALL/bin:$PATH" ;;
-esac
-
 # Completions — 毎回の動的生成は遅いのでキャッシュし、バイナリ更新時のみ再生成
 cache_completion() {
   local cache="$XDG_CACHE_HOME"/zsh/completions/_"$1"
