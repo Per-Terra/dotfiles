@@ -11,20 +11,20 @@
       {
         "id": "543226d1-657b-4623-96ac-9eba7a73c13d",
         "type": "custom-text",
-        "customText": " (",
-        "color": "brightMagenta"
+        "color": "brightMagenta",
+        "customText": " ("
       },
       {
         "id": "e8b55122-e146-4444-bbc7-523c10ee3b54",
         "type": "thinking-effort",
-        "rawValue": true,
-        "color": "brightMagenta"
+        "color": "brightMagenta",
+        "rawValue": true
       },
       {
         "id": "e9b90bc2-ca92-43ca-9709-a3cfb3342292",
         "type": "custom-text",
-        "customText": ")",
-        "color": "brightMagenta"
+        "color": "brightMagenta",
+        "customText": ")"
       },
       {
         "id": "2",
@@ -340,7 +340,7 @@
   "defaultPadding": "",
   "inheritSeparatorColors": false,
   "globalBold": false,
-  "gitCacheTtlSeconds": 5,
+  "gitCacheTtlSeconds": 60,
   "minimalistMode": false,
   "powerline": {
     "enabled": false,
@@ -356,7 +356,7 @@
     "continueThemeAcrossLines": false
   },
   "installation": {
-    "method": "pinned",
-    "installedVersion": "2.2.22"
+    "method": "auto-update",
+    "packageManager": "bun"
   }
 }
