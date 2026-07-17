@@ -15,11 +15,11 @@ ensure_zcompiled "$ZDOTDIR"/.zshrc
 cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}"/sheldon
 sheldon_cache="$cache_dir"/sheldon.zsh
 sheldon_toml="${XDG_CONFIG_HOME:-$HOME/.config}"/sheldon/plugins.toml
-if [[ ! -r "$sheldon_cache" || "$sheldon_toml" -nt "$sheldon_cache" ]]; then
+if [[ ! -s "$sheldon_cache" || "$sheldon_toml" -nt "$sheldon_cache" ]] && (( $+commands[sheldon] )); then
   mkdir -p $cache_dir
-  sheldon source > $sheldon_cache
+  sheldon source > "$sheldon_cache.tmp" && mv "$sheldon_cache.tmp" "$sheldon_cache"
 fi
-source "$sheldon_cache"
+[[ ! -s "$sheldon_cache" ]] || source "$sheldon_cache"
 unset cache_dir sheldon_cache sheldon_toml
 
 zsh-defer unfunction source
