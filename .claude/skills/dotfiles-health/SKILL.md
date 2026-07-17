@@ -44,8 +44,8 @@ Audit this GNU Stow-based dotfiles repo (`~/dev/dotfiles`, target `$HOME`) again
 ## Procedure
 
 1. Launch parallel **read-only** investigation subagents, one per dimension (1–4 and 6 can each be one agent; 5 needs Bash for benchmarking but must not persist changes — temp files go to the scratchpad, use throwaway `ZDOTDIR`). Tell every investigator explicitly: change nothing, report findings with file:line, separate "definitely broken" from "user judgment needed".
-2. Synthesize. Classify fixes:
-   - **Apply** (via fix subagents): drift commits, `.bak` removal after diffing, dead-code removal, guards, plugin updates, install.sh pin bumps.
+2. Synthesize findings and **present them to the user before changing anything** — even "obviously safe" fixes. Config choices often encode intent that isn't visible in the file (e.g. bun installed via official script on purpose, tools deliberately not in the installer). Propose a fix list, get approval, then apply. Classify proposals:
+   - **Fix candidates** (after approval, via fix subagents): drift commits, `.bak` removal after diffing, dead-code removal, guards, plugin updates, install.sh pin bumps.
    - **Report only**: apt tool replacement, moving packages between OS lists, anything touching auth/credentials, judgment calls (alias duplicates, package restructuring).
 3. Fix subagents must not overlap on files (zsh/sheldon/install.sh = one agent; keep `sheldon lock --update` sequenced *after* any plugins.toml edit) and must not commit — commit from the top level in logical chunks after verification.
 4. Verify after fixes: `zsh -n` on all zsh files, `zsh -i -c exit` with empty stderr on a pty, clean-env startup benchmark, `sheldon lock` succeeds, `stow -v` dry-run shows no conflicts, `git status` clean after commits.
@@ -54,6 +54,6 @@ Audit this GNU Stow-based dotfiles repo (`~/dev/dotfiles`, target `$HOME`) again
 ## Repo-specific gotchas
 
 - `stow` folding: `~/.config/git`, `~/.ssh`, `~/.config/tmux`, `~/.claude`, `~/.config/gh` are real dirs with intentional unmanaged cohabitants (locals, plugins, credentials) — per-file symlinks there are correct, not drift.
-- `claude` and `gh` are stow packages holding only the shareable subset (`~/.claude/settings.json` + `statusline.sh`; `gh/config.yml`). Never pull `hosts.yml`, `.credentials.json`, or anything credential-shaped into the repo.
+- `claude` and `gh` are stow packages holding only the shareable subset (`~/.claude/settings.json`; `gh/config.yml`). Never pull `hosts.yml`, `.credentials.json`, or anything credential-shaped into the repo.
 - The pty-less `can't change option: zle` warning from `zsh -i` is a tty artifact, not a config error.
 - cmux/karabiner are macOS-only and correctly absent on Linux.

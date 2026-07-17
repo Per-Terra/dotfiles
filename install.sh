@@ -84,12 +84,6 @@ install_prerequisites_linux() {
     curl -LsSf https://astral.sh/uv/install.sh | sh
   fi
 
-  # yt-dlp: config is stowed (COMMON_PACKAGES) so install the binary too
-  if ! has yt-dlp; then
-    info "Installing yt-dlp..."
-    PATH="$HOME/.local/bin:$PATH" uv tool install yt-dlp
-  fi
-
   # bun
   if ! has bun; then
     info "Installing bun..."

@@ -14,7 +14,7 @@ cd ~/dev/dotfiles
 The installer:
 
 1. Installs prerequisites — Homebrew + Brewfile on macOS; apt packages plus
-   eza, gh, sheldon, starship, uv, yt-dlp, bun, deno, and pnpm on Linux
+   eza, gh, sheldon, starship, uv, bun, deno, and pnpm on Linux
 2. Stows the packages below into `$HOME`
 3. Creates machine-local config stubs (see below)
 4. Installs nvm and tpm (tmux plugin manager)
@@ -37,7 +37,7 @@ Common (macOS and Linux):
 | `ccstatusline`| Claude Code status line (ccstatusline) settings      |
 | `yt-dlp`      | yt-dlp config (cookie files are gitignored)          |
 | `husky`       | global husky init                                    |
-| `claude`      | Claude Code `~/.claude/settings.json` and `statusline.sh` |
+| `claude`      | Claude Code `~/.claude/settings.json`                |
 | `gh`          | GitHub CLI config (`config.yml` only; `hosts.yml` credentials are never tracked) |
 
 macOS only: `cmux`, `karabiner`.
