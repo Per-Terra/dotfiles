@@ -36,7 +36,7 @@ install_prerequisites_linux() {
   info "Installing apt packages..."
   sudo apt-get update
   sudo apt-get install -y \
-    zsh git stow tmux fzf zoxide bat curl wget unzip
+    zsh git stow tmux fzf zoxide bat curl wget unzip gnupg
 
   # bat is named batcat on Ubuntu — create symlink
   if has batcat && ! has bat; then
@@ -176,6 +176,14 @@ EOF
 # Machine-specific SSH host definitions
 EOF
     warn "Created ~/.ssh/config.local — add your host definitions"
+  fi
+
+  if [[ ! -f "$HOME/.config/zsh/.zshrc.local" ]]; then
+    mkdir -p "$HOME/.config/zsh"
+    cat > "$HOME/.config/zsh/.zshrc.local" << 'EOF'
+# Machine-specific zsh settings (sourced at the end of .zshrc)
+EOF
+    warn "Created ~/.config/zsh/.zshrc.local — add machine-specific shell settings"
   fi
 }
 
