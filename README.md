@@ -42,6 +42,9 @@ Common (macOS and Linux):
 
 macOS only: `cmux`, `karabiner`.
 
+Linux (WSL) only: `obsidian` — wrapper script (`~/.local/bin/obsidian`) for the
+Windows Obsidian CLI (`Obsidian.com`); requires the Obsidian app to be running.
+
 ## Machine-local configuration
 
 Machine-specific settings live in untracked `*.local` files, sourced or

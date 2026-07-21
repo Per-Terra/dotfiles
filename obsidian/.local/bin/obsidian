@@ -1,0 +1,10 @@
+#!/bin/sh
+# Obsidian 公式 CLI への WSL 用ラッパー (Windows 版 Obsidian.com を呼ぶ)
+# 前提: Windows 側で Obsidian アプリが起動していること
+cli="/mnt/c/Users/${USER}/AppData/Local/Programs/Obsidian/Obsidian.com"
+if [ ! -e "$cli" ]; then
+  echo "obsidian: CLI が見つかりません: $cli" >&2
+  echo "WSL 以外の環境、または Windows ユーザー名が \$USER と異なる場合はこのラッパーを調整すること" >&2
+  exit 127
+fi
+exec "$cli" "$@"

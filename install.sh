@@ -129,11 +129,15 @@ install_tpm() {
 # not the gh command itself (installed above via apt/brew).
 COMMON_PACKAGES=(zsh sheldon git ssh ghostty tmux ccstatusline yt-dlp husky claude gh)
 MACOS_PACKAGES=(cmux karabiner)
+# "obsidian" is a WSL wrapper for the Windows Obsidian CLI (Obsidian.com)
+LINUX_PACKAGES=(obsidian)
 
 stow_packages() {
   local packages=("${COMMON_PACKAGES[@]}")
   if [[ "$OS" == "Darwin" ]]; then
     packages+=("${MACOS_PACKAGES[@]}")
+  else
+    packages+=("${LINUX_PACKAGES[@]}")
   fi
 
   info "Stowing packages: ${packages[*]}"
