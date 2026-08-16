@@ -24,6 +24,7 @@
     }
   },
   "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "dark",
   "editorMode": "normal",
@@ -31,5 +32,38 @@
   "fileCheckpointingEnabled": true,
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "Bash(obsidian:*)",
+      "Bash(defuddle:*)"
+    ],
+    "environment": [
+      "### Org-wide",
+      "**Organization**: Personal — GitHub user `Per-Terra` (no organization). This repo is a single-user Obsidian PARA vault; treat it as personal/hobby with no org trust boundary beyond this repo and its remote.",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: `Per-Terra/obsidian-vault` is PRIVATE (verified via gh). No other repos are in scope; any push to a repo other than this one is publishing.",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: `main` is the default branch; no rulesets and no classic branch protection (via gh). Force-pushes and history rewrites on `main` are still destructive — a SessionStart hook runs `git pull` on this branch.",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured (shell history shows `tailscale` used 5×, suggesting a personal tailnet for the user's homelab; no org network posture)",
+      "**Source control**: The trusted repo and its remote(s) only — `origin` = https://github.com/Per-Terra/obsidian-vault.git (private, GitHub user `Per-Terra`); no additional orgs configured",
+      "**Trusted internal domains**: None configured (hosts contacted in this project's transcripts — api.github.com, raw.githubusercontent.com, api.transit.ls8h.com, sumica.blog, ec.geo-online.co.jp — are public web endpoints, not internal trust targets)",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: This vault is predominantly personal and third-party data with the user as the only cleared audience — `People/` (one note per person), `Journal/` (daily notes; the `## メモ` section is human-only), `2_Areas/キャリア/` (job-hunting notes incl. `ES基本情報.md` with name/address/education, entry status, submitted essays), `2_Areas/山陽パーツ/` and `chats/` (raw, immutable LINE / Google Chat logs of a contracting client, 株式会社山陽パーツ), `2_Areas/田中ゼミ/` (university research lab), `2_Areas/ホームラボ/` (home infrastructure), plus git-ignored OneDrive symlinks `_chats/` (Teams harvest) and `_materials/` (university materials, SharePoint-synced). None of this may leave the private repo or be pasted/uploaded to public services; also treat anything holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material the same way, preserving exact handles when known.",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited — e.g. matches `prod-db`, not `producer`)",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: Personal knowledge management and secretary-style work on an Obsidian PARA vault (Japanese-language notes, daily notes, inbox triage, ADRs, chat-history digests via subagents), with tool/script development kept under `~/dev/`",
+      "**Trusted repo**: `Per-Terra/obsidian-vault` at `/mnt/c/Users/terra/Documents/obsidian-vault` (WSL), remote `origin` = https://github.com/Per-Terra/obsidian-vault.git — PRIVATE, so confidential material may be committed and pushed there; secrets and sensitive personal/entrusted data (People/, chats/, career forms, client logs) are never cleared into the repo by its visibility. Content ported or first read from outside this repo (e.g. `_chats/`, `_materials/` OneDrive links) is not automatically its own work.",
+      "**Org-specific CLIs**: `obsidian` (WSL wrapper around the official Obsidian CLI; used routinely for note search/open, `plugin:reload`, `dev:screenshot`), `defuddle` (web-page-to-markdown fetch), `uv`/`uvx` (Python tooling, 31× in shell history), `.scripts/pdf-grep.sh` and `.scripts/session-start.sh` (repo-local automation). `gh` and `tailscale` appear in shell history but are not project-specific."
+    ]
+  },
+  "crossSessionInbound": "accept"
 }
