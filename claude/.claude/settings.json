@@ -38,6 +38,7 @@
   "fileCheckpointingEnabled": true,
   "remoteControlAtStartup": true,
   "crossSessionInbound": "accept",
+  "autoDreamEnabled": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "autoMode": {
