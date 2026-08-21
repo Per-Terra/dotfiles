@@ -13,7 +13,13 @@
     "refreshInterval": 10
   },
   "enabledPlugins": {
-    "obsidian@obsidian-skills": true
+    "obsidian@obsidian-skills": true,
+    "frontend-design@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "slack@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "obsidian-skills": {
@@ -31,6 +37,7 @@
   "switchModelsOnFlag": true,
   "fileCheckpointingEnabled": true,
   "remoteControlAtStartup": true,
+  "crossSessionInbound": "accept",
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "autoMode": {
@@ -64,6 +71,5 @@
       "**Trusted repo**: `Per-Terra/obsidian-vault` at `/mnt/c/Users/terra/Documents/obsidian-vault` (WSL), remote `origin` = https://github.com/Per-Terra/obsidian-vault.git — PRIVATE, so confidential material may be committed and pushed there; secrets and sensitive personal/entrusted data (People/, chats/, career forms, client logs) are never cleared into the repo by its visibility. Content ported or first read from outside this repo (e.g. `_chats/`, `_materials/` OneDrive links) is not automatically its own work.",
       "**Org-specific CLIs**: `obsidian` (WSL wrapper around the official Obsidian CLI; used routinely for note search/open, `plugin:reload`, `dev:screenshot`), `defuddle` (web-page-to-markdown fetch), `uv`/`uvx` (Python tooling, 31× in shell history), `.scripts/pdf-grep.sh` and `.scripts/session-start.sh` (repo-local automation). `gh` and `tailscale` appear in shell history but are not project-specific."
     ]
-  },
-  "crossSessionInbound": "accept"
+  }
 }
