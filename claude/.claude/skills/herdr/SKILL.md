@@ -7,14 +7,12 @@ description: "Control Herdr, a terminal multiplexer for coding agents: inspect a
 
 Herdr organizes terminals into workspaces, tabs, and panes, recognizes coding agents running inside panes, and exposes the current session through the `herdr` CLI.
 
-Before issuing any control command, verify that this agent is running inside a Herdr-managed pane:
+Before anything else, verify that this agent is running inside a Herdr-managed pane:
 
 ```bash
 test "${HERDR_ENV:-}" = 1
 ```
 
-If the check fails, say that you are not running inside Herdr and stop. Do not inspect or control the focused Herdr session from outside Herdr.
+If the check fails, say that you are not running inside Herdr and stop. Do not inspect or control a Herdr session from outside Herdr.
 
-When the check passes, the `herdr` binary in `PATH` talks to the current session. Use it to inspect neighboring work, create terminal layout, start agents and commands, read output, and wait for state changes.
-
-Run `herdr --skill`.
+If it passes, run `herdr --skill` and follow the instructions it prints. They match the installed version and are the authority on command syntax; do not rely on remembered syntax. If a project-level skill wraps Herdr for session management (for example a spawn or sessions skill), start and close agents through that skill rather than with raw `herdr` commands.
