@@ -1,8 +1,20 @@
 ---
 name: herdr
-description: "Control Herdr, a terminal multiplexer for coding agents. Use only when the user explicitly mentions Herdr or asks to use Herdr to inspect or control panes, tabs, workspaces, commands, or another agent. Do not use merely because a task could benefit from a background terminal, delegation, or parallel work. Requires HERDR_ENV=1."
+description: "Control Herdr, a terminal multiplexer for coding agents: inspect and control panes, tabs, workspaces, commands, and other agents (start, prompt, wait for, read, and close them). Use it whenever it helps the task, without waiting for the user to mention Herdr — for example to delegate work to another agent, run and watch long commands, or check what other sessions are doing. Requires HERDR_ENV=1."
 ---
 
-First check that `HERDR_ENV=1` is set. If it is not, stop and say that this agent is not running inside a Herdr-managed pane.
+# Herdr
 
-Then run `herdr --skill` and follow its output. It prints the full skill bundled with the installed herdr binary, so it always matches the running release.
+Herdr organizes terminals into workspaces, tabs, and panes, recognizes coding agents running inside panes, and exposes the current session through the `herdr` CLI.
+
+Before issuing any control command, verify that this agent is running inside a Herdr-managed pane:
+
+```bash
+test "${HERDR_ENV:-}" = 1
+```
+
+If the check fails, say that you are not running inside Herdr and stop. Do not inspect or control the focused Herdr session from outside Herdr.
+
+When the check passes, the `herdr` binary in `PATH` talks to the current session. Use it to inspect neighboring work, create terminal layout, start agents and commands, read output, and wait for state changes.
+
+For the full command guide, run `herdr --skill` and follow its output. It prints the skill bundled with the installed herdr binary, so it always matches the running release.
