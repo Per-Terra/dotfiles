@@ -17,4 +17,4 @@ If the check fails, say that you are not running inside Herdr and stop. Do not i
 
 When the check passes, the `herdr` binary in `PATH` talks to the current session. Use it to inspect neighboring work, create terminal layout, start agents and commands, read output, and wait for state changes.
 
-For the full command guide, run `herdr --skill` and follow its output. It prints the skill bundled with the installed herdr binary, so it always matches the running release.
+For the full command guide, run `herdr --skill` and follow its output.
