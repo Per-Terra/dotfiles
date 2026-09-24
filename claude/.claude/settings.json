@@ -28,6 +28,7 @@
   "autoDreamEnabled": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
+  "promptSuggestionEnabled": false,
   "autoMode": {
     "allow": [
       "$defaults",
