@@ -17,7 +17,6 @@
     "claude-code-setup@claude-plugins-official": true,
     "slack@claude-plugins-official": true
   },
-  "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "dark",
