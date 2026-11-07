@@ -1,12 +1,16 @@
-tap "alexstrnik/browserino", trusted: true
+tap "alexstrnik/browserino", "https://github.com/AlexStrNik/homebrew-Browserino", trusted: true
 tap "beutton/brew", trusted: true
 tap "deskflow/tap", trusted: true
+tap "hamed-elfayome/claude-usage"
+tap "jhlee0409/tap"
 tap "manaflow-ai/cmux", trusted: true
 tap "teamookla/speedtest", trusted: true
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Vector graphics library with cross-device output support
 brew "cairo"
+# Cross-platform make
+brew "cmake"
 # Secure runtime for JavaScript and TypeScript
 brew "deno"
 # Pluggable and configurable code formatting platform written in Rust
@@ -35,14 +39,18 @@ brew "tesseract"
 brew "ghostscript"
 # Distributed revision control system
 brew "git"
+# Agent multiplexer that lives in your terminal
+brew "herdr"
 # Tools and libraries to manipulate images in select formats
 brew "imagemagick"
 # New file format for still image compression
 brew "jpeg-xl"
 # Apple Silicon Monitor Top written in Go Lang
 brew "mactop"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.14"
+# Mac App Store command-line interface
+brew "mas"
+# Polyglot runtime manager (asdf rust clone)
+brew "mise"
 # Port scanning utility for large networks
 brew "nmap"
 # Fast, disk space efficient package manager
@@ -53,10 +61,14 @@ brew "poppler"
 brew "pwgen"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.13"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.14"
 # Tools for and transforming and inspecting PDF files
 brew "qpdf"
 # QR Code generation
 brew "qrencode"
+# Rsync for cloud storage
+brew "rclone"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Fast, configurable, shell plugin manager
@@ -81,14 +93,12 @@ brew "yt-dlp"
 brew "zoxide"
 # Ookla Speedtest
 brew "teamookla/speedtest/speedtest"
-# View, print, and comment on PDF documents
-cask "adobe-acrobat-reader"
+# GPU-accelerated terminal emulator
+cask "alacritty"
 # Enable Windows-like alt-tab
 cask "alt-tab"
 # Memory training application
 cask "anki"
-# Agent orchestration platform
-cask "antigravity"
 # Multi-track audio editor and recorder
 cask "audacity"
 # Japanese input method
@@ -101,18 +111,22 @@ cask "alexstrnik/browserino/browserino"
 cask "chatgpt"
 # Anthropic's official Claude AI desktop app
 cask "claude"
-# Ghostty-based terminal with vertical tabs and notifications for AI coding agents
-cask "cmux"
+# Browse and analyze Claude Code conversation history offline
+cask "jhlee0409/tap/claude-code-history-viewer", trusted: true
+# Native macOS menu bar app for monitoring Claude AI usage limits
+cask "hamed-elfayome/claude-usage/claude-usage-tracker", trusted: true
 # Mouse and keyboard sharing utility
 cask "deskflow/tap/deskflow"
 # Utilities designed to make common development tasks easier
 cask "devtoys"
 # Voice and text chat software
 cask "discord"
-# App to build and share containerised applications and microservices
-cask "docker-desktop"
+# Desktop client for Ente Auth
+cask "ente-auth"
 # Web browser
 cask "firefox"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
 # Free and open-source image editor
 cask "gimp"
 # Web browser
@@ -153,18 +167,28 @@ cask "rectangle"
 cask "scroll-reverser"
 # Mesh VPN based on WireGuard
 cask "tailscale-app"
+# To-do list
+cask "todoist-app"
 # Open-source code editor
 cask "visual-studio-code"
 # Multimedia player
 cask "vlc"
-# Rust-based terminal
-cask "warp"
 # Display macOS power usage (wattage) in the menu bar
 cask "beutton/brew/wattsec"
 # Network protocol analyzer
 cask "wireshark-app"
 # Image-converter and resiser tool
 cask "xnconvert"
+mas "Amphetamine", id: 937984704
+mas "Bitwarden", id: 1352778147
+mas "Brother iPrint&Scan", id: 1193539993
+mas "CotEditor", id: 1024640650
+mas "Goodnotes", id: 1444383602
+mas "LINE", id: 539883307
+mas "Prime Video", id: 545519333
+mas "RunCatNeo", id: 6757801838
+mas "Toggl Track", id: 1291898086
+mas "Windows App", id: 1295203466
 vscode "3w36zj6.textlint"
 vscode "adpyke.codesnap"
 vscode "antfu.goto-alias"
@@ -197,8 +221,6 @@ vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
 vscode "ms-python.vscode-python-envs"
 vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vscode-remote.remote-ssh"
-vscode "ms-vscode-remote.remote-ssh-edit"
 vscode "ms-vscode.cmake-tools"
 vscode "ms-vscode.cpp-devtools"
 vscode "ms-vscode.hexeditor"
@@ -214,8 +236,6 @@ vscode "streetsidesoftware.code-spell-checker"
 vscode "stylelint.vscode-stylelint"
 vscode "tamasfe.even-better-toml"
 vscode "tombonnike.vscode-status-bar-format-toggle"
-vscode "virtual-whirlwind.vscode-povray2"
 vscode "vue.volar"
 vscode "wraith13.external-files"
 vscode "yzhang.markdown-all-in-one"
-npm "corepack"
