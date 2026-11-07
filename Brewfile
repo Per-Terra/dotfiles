@@ -3,7 +3,6 @@ tap "beutton/brew", trusted: true
 tap "deskflow/tap", trusted: true
 tap "hamed-elfayome/claude-usage"
 tap "jhlee0409/tap"
-tap "manaflow-ai/cmux", trusted: true
 tap "teamookla/speedtest", trusted: true
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
@@ -53,8 +52,6 @@ brew "mas"
 brew "mise"
 # Port scanning utility for large networks
 brew "nmap"
-# Fast, disk space efficient package manager
-brew "pnpm"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Password generator
@@ -83,8 +80,6 @@ brew "streamlink"
 brew "terminal-notifier"
 # Terminal multiplexer
 brew "tmux"
-# Extremely fast Python package installer and resolver, written in Rust
-brew "uv"
 # Internet file retriever
 brew "wget"
 # Feature-rich command-line audio/video downloader
