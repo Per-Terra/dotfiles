@@ -6,21 +6,28 @@ Works on macOS and Linux (WSL2).
 ## Install
 
 ```sh
-git clone https://github.com/Per-Terra/dotfiles.git ~/dev/dotfiles
+git clone git@github.com:Per-Terra/dotfiles.git ~/dev/dotfiles
 cd ~/dev/dotfiles
 ./install.sh
 ```
 
 The installer:
 
-1. Installs prerequisites — Homebrew + Brewfile on macOS; apt packages plus
-   eza, gh, sheldon, starship, uv, bun, deno, and pnpm on Linux
+1. Installs prerequisites — Homebrew + Brewfile on macOS (formulae, casks,
+   App Store apps via `mas`, VS Code extensions); apt packages plus eza, gh,
+   sheldon, starship, and mise on Linux
 2. Stows the packages below into `$HOME`
 3. Creates machine-local config stubs (see below)
-4. Installs nvm and tpm (tmux plugin manager)
+4. Installs the mise tools (Node, Bun, pnpm, Deno, uv, Ruff, agy), the global
+   JS tools (`defuddle` with pnpm, `ccstatusline` with bun), and tpm (tmux
+   plugin manager)
 
 After installing, restart your shell. Inside tmux, press `prefix + I` to
-install tmux plugins.
+install tmux plugins. Sign in to the App Store before `brew bundle` so the
+`mas` lines can install.
+
+To refresh the Brewfile after installing or removing something with Homebrew:
+`brew bundle dump --force --file=~/dev/dotfiles/Brewfile`.
 
 ## Packages
 
@@ -39,8 +46,21 @@ Common (macOS and Linux):
 | `husky`       | global husky init                                    |
 | `claude`      | Claude Code `~/.claude/settings.json`                |
 | `gh`          | GitHub CLI config (`config.yml` only; `hosts.yml` credentials are never tracked) |
+| `mise`        | mise global config: runtimes and dev CLIs            |
 
-macOS only: `cmux`, `karabiner`.
+macOS only:
+
+- `cmux`
+- `karabiner` — stowed as the whole `~/.config/karabiner` directory
+  (Karabiner-Elements does not detect changes to a symlinked `karabiner.json`).
+  `automatic_backups/` is gitignored. After stowing, run
+  `launchctl kickstart -k gui/$(id -u)/org.pqrs.service.agent.Karabiner-Console-User-Server`
+- `voice` — `~/.local/bin/voice`: starts the agy voice conversation
+  (`~/secretary/tools/agy-voice` on agent-host) with this Mac's microphone and
+  speakers. It runs `agy mic-serve`, forwards it to agent-host port 24713 over
+  its own SSH connection, and opens a `voice` workspace in herdr's agent-host
+  machine. Quitting agy closes the workspace and stops the forward; `voice stop`
+  stops it by hand
 
 Linux (WSL) only: `obsidian` — wrapper script (`~/.local/bin/obsidian`) for the
 Windows Obsidian CLI (`Obsidian.com`); requires the Obsidian app to be running.
