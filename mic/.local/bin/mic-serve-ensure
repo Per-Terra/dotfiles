@@ -1,0 +1,9 @@
+#!/bin/bash
+# agent-host に ssh でつないだときに ~/.ssh/config の LocalCommand から呼ばれ、
+# agy の声の会話のために Mac のマイクとスピーカーを渡す `agy mic-serve`（127.0.0.1:4713）が
+# 動いていなければ裏で立てる。LocalCommand は同期で走るので、待たずに戻る。
+nc -z 127.0.0.1 4713 2>/dev/null && exit 0
+command -v agy >/dev/null || exit 0
+mkdir -p "$HOME/Library/Logs"
+nohup agy mic-serve >>"$HOME/Library/Logs/agy-mic-serve.log" 2>&1 </dev/null &
+exit 0

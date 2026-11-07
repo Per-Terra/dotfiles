@@ -113,8 +113,8 @@ install_tpm() {
 # Note: "gh" is the stow package for GitHub CLI config (~/.config/gh/config.yml),
 # not the gh command itself (installed above via apt/brew).
 COMMON_PACKAGES=(zsh sheldon git ssh ghostty tmux ccstatusline yt-dlp husky claude gh mise)
-# "voice" starts the agy voice conversation on agent-host with this Mac's mic
-MACOS_PACKAGES=(karabiner voice)
+# "mic" lends this Mac's mic and speakers to agy on agent-host when ssh connects (see ssh config)
+MACOS_PACKAGES=(karabiner mic)
 # "obsidian" is a WSL wrapper for the Windows Obsidian CLI (Obsidian.com)
 LINUX_PACKAGES=(obsidian)
 

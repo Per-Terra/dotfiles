@@ -66,12 +66,13 @@ macOS only:
   (Karabiner-Elements does not detect changes to a symlinked `karabiner.json`).
   `automatic_backups/` is gitignored. After stowing, run
   `launchctl kickstart -k gui/$(id -u)/org.pqrs.service.agent.Karabiner-Console-User-Server`
-- `voice` — `~/.local/bin/voice`: starts the agy voice conversation
-  (`~/secretary/tools/agy-voice` on agent-host) with this Mac's microphone and
-  speakers. It runs `agy mic-serve`, forwards it to agent-host port 24713 over
-  its own SSH connection, and opens a `voice` workspace in herdr's agent-host
-  machine. Quitting agy closes the workspace and stops the forward; `voice stop`
-  stops it by hand
+- `mic` — `~/.local/bin/mic-serve-ensure`: lends this Mac's microphone and
+  speakers to agy's voice mode on agent-host. The `agent-host` entry in the SSH
+  config runs it as `LocalCommand` to start `agy mic-serve` (127.0.0.1:4713) if
+  it is not running, and forwards it to agent-host port 24713 with
+  `RemoteForward`. Any connection to agent-host, including herdr's, carries it;
+  a second connection warns that the forward failed and connects without it.
+  The first `agy mic-serve` asks for microphone access for the terminal app
 
 Linux (WSL) only: `obsidian` — wrapper script (`~/.local/bin/obsidian`) for the
 Windows Obsidian CLI (`Obsidian.com`); requires the Obsidian app to be running.
