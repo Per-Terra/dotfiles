@@ -11,3 +11,7 @@
 	gpgsign = true
 [tag]
 	gpgSign = true
+[core]
+	editor = code --wait
+[merge]
+	conflictstyle = zdiff3
