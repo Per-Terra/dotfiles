@@ -114,7 +114,7 @@ install_tpm() {
 # not the gh command itself (installed above via apt/brew).
 COMMON_PACKAGES=(zsh sheldon git ssh ghostty tmux ccstatusline yt-dlp husky claude gh mise)
 # "voice" starts the agy voice conversation on agent-host with this Mac's mic
-MACOS_PACKAGES=(cmux karabiner voice)
+MACOS_PACKAGES=(karabiner voice)
 # "obsidian" is a WSL wrapper for the Windows Obsidian CLI (Obsidian.com)
 LINUX_PACKAGES=(obsidian)
 

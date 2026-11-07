@@ -18,7 +18,7 @@ The installer:
    sheldon, starship, and mise on Linux
 2. Stows the packages below into `$HOME`
 3. Creates machine-local config stubs (see below)
-4. Installs the mise tools (Node, Bun, pnpm, Deno, uv, Ruff, agy), the global
+4. Installs the mise tools (Node, Bun, pnpm, uv, Ruff, agy), the global
    JS tools (`defuddle` with pnpm, `ccstatusline` with bun), and tpm (tmux
    plugin manager)
 
@@ -53,7 +53,6 @@ Common (macOS and Linux):
 
 macOS only:
 
-- `cmux`
 - `karabiner` — stowed as the whole `~/.config/karabiner` directory
   (Karabiner-Elements does not detect changes to a symlinked `karabiner.json`).
   `automatic_backups/` is gitignored. After stowing, run
