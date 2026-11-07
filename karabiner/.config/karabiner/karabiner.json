@@ -797,30 +797,38 @@
                             "to": [{ "key_code": "left_control" }]
                         },
                         {
-                            "from": { "key_code": "left_option" },
-                            "to": [{ "key_code": "left_command" }]
-                        },
-                        {
-                            "from": { "key_code": "left_command" },
-                            "to": [{ "key_code": "left_option" }]
-                        },
-                        {
-                            "from": { "key_code": "right_option" },
-                            "to": [{ "key_code": "right_command" }]
-                        },
-                        {
-                            "from": { "key_code": "right_command" },
-                            "to": [{ "key_code": "right_option" }]
-                        },
-                        {
                             "from": { "key_code": "japanese_pc_nfer" },
                             "to": [{ "key_code": "japanese_eisuu" }]
                         },
                         {
                             "from": { "key_code": "japanese_pc_xfer" },
                             "to": [{ "key_code": "japanese_kana" }]
+                        },
+                        {
+                            "from": { "key_code": "left_command" },
+                            "to": [{ "key_code": "left_option" }]
+                        },
+                        {
+                            "from": { "key_code": "left_option" },
+                            "to": [{ "key_code": "left_command" }]
+                        },
+                        {
+                            "from": { "key_code": "right_command" },
+                            "to": [{ "key_code": "right_option" }]
+                        },
+                        {
+                            "from": { "key_code": "right_option" },
+                            "to": [{ "key_code": "right_command" }]
                         }
                     ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 5662,
+                        "vendor_id": 4152
+                    },
+                    "ignore": true
                 }
             ],
             "name": "Default profile",

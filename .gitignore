@@ -13,3 +13,4 @@ yt-dlp/.config/yt-dlp/*_cookies.txt
 # gh credentials must never be committed (only config.yml is tracked)
 gh/.config/gh/hosts.yml
 gh/.config/gh/state.yml
+karabiner/.config/karabiner/automatic_backups/
