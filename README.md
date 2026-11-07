@@ -18,7 +18,7 @@ The installer:
    sheldon, starship, and mise on Linux
 2. Stows the packages below into `$HOME`
 3. Creates machine-local config stubs (see below)
-4. Installs the mise tools (Node, Bun, pnpm, uv, Ruff, agy), the global
+4. Installs the mise tools (`mise/.config/mise/config.toml`), the global
    JS tools (`defuddle` with pnpm, `ccstatusline` with bun), and tpm (tmux
    plugin manager)
 

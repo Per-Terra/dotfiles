@@ -9,3 +9,4 @@ pnpm = "latest"
 "aqua:astral-sh/ruff" = "latest"
 "github:google-antigravity/antigravity-cli" = { version = "latest", bin = "agy" }
 "pipx:yt-dlp" = { version = "latest", extras = "default" }  # YouTube の取得の JS は node（yt-dlp の config）
+bitwarden = "latest"
