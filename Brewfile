@@ -10,8 +10,6 @@ brew "bat"
 brew "cairo"
 # Cross-platform make
 brew "cmake"
-# Secure runtime for JavaScript and TypeScript
-brew "deno"
 # Pluggable and configurable code formatting platform written in Rust
 brew "dprint"
 # Perl lib for reading and writing EXIF metadata
@@ -82,8 +80,6 @@ brew "terminal-notifier"
 brew "tmux"
 # Internet file retriever
 brew "wget"
-# Feature-rich command-line audio/video downloader
-brew "yt-dlp"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # Ookla Speedtest

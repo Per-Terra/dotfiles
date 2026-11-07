@@ -6,3 +6,5 @@
 --embed-thumbnail
 --embed-subs
 --embed-metadata
+--no-js-runtimes
+--js-runtimes node

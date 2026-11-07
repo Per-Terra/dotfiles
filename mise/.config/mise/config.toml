@@ -1,5 +1,5 @@
 # 言語のランタイムと開発の CLI（mise のグローバル設定）。版は固定せず、node だけ LTS を追う。上げるときは `mise upgrade`。
-# GUI のアプリ・ライブラリ・Homebrew のほうが合う道具（gh・ffmpeg、yt-dlp が依存する deno など）は Brewfile。
+# GUI のアプリ・ライブラリ・Homebrew のほうが合う道具（gh・ffmpeg など）は Brewfile。
 # JS のグローバルの道具は pnpm（`pnpm add -g`）、ccstatusline だけは bun のグローバル（statusLine が bun で起動する）。
 [tools]
 node = "lts"
@@ -8,3 +8,4 @@ pnpm = "latest"
 "aqua:astral-sh/uv" = "latest"
 "aqua:astral-sh/ruff" = "latest"
 "github:google-antigravity/antigravity-cli" = { version = "latest", bin = "agy" }
+"pipx:yt-dlp" = { version = "latest", extras = "default" }  # YouTube の取得の JS は node（yt-dlp の config）
