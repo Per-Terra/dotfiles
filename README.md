@@ -31,8 +31,8 @@ system settings (Dock, Finder, trackpad, keyboard).
 
 To refresh the Brewfile after installing or removing something with Homebrew:
 `brew bundle dump --force --file=~/dev/dotfiles/Brewfile`. The dump leaves out
-casks installed outside Homebrew; keep the hand-added `gyazo`,
-`karabiner-elements`, `logi-options+`, and `zoom` lines.
+casks installed outside Homebrew; keep the hand-added `gyazo` and `zoom`
+lines (installed from their own installers on this Mac).
 
 Apps installed by hand, with their own installers and updaters:
 

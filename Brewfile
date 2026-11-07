@@ -132,13 +132,13 @@ cask "hot"
 cask "inkscape"
 # Jellyfin desktop client
 cask "jellyfin-media-player"
-# Keyboard customiser (updates itself)
+# Keyboard customiser
 cask "karabiner-elements"
 # File archiver
 cask "keka"
 # Blocks all Keyboard and TouchBar input
 cask "keyboardcleantool"
-# Software for Logitech devices (updates itself)
+# Software for Logitech devices
 cask "logi-options+"
 # Trims video and audio files losslessly
 cask "losslesscut"
