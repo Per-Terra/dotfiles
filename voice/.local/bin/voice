@@ -1,0 +1,100 @@
+#!/bin/bash
+# agent-host の話し相手（agy の音声の会話、~/secretary/tools/agy-voice）を、Mac のマイクとスピーカーで始める。
+#   voice        マイクを渡し、herdr の agent-host に「voice」のワークスペースを開いて start を動かす
+#   voice stop   マイクの転送と mic-serve を止める（agy を /quit すれば自動で止まる）
+# マイクは Mac の `agy mic-serve`（127.0.0.1:4713）を、専用の ssh の接続の -R で agent-host の 24713 番に渡す。
+# ~/.ssh/config の agent-host に RemoteForward を書かないのは、herdr の machine の接続やふだんの ssh まで
+# 24713 番を取り合い、古い接続が転送を持ったまま残るため。
+set -euo pipefail
+
+host=agent-host
+machine=agent-host
+local_port=4713
+remote_port=24713
+tool_dir=/home/agent/secretary/tools/agy-voice
+state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/voice"
+log_dir="$HOME/Library/Logs"
+
+info() { printf '\033[1;34m[voice]\033[0m %s\n' "$*"; }
+die() { printf '\033[1;31m[voice]\033[0m %s\n' "$*" >&2; exit 1; }
+
+kill_pidfile() {
+  local f="$state_dir/$1.pid"
+  [ -f "$f" ] || return 0
+  kill "$(cat "$f")" 2>/dev/null || true
+  rm -f "$f"
+}
+
+stop() {
+  kill_pidfile watch
+  kill_pidfile tunnel
+  kill_pidfile mic-serve
+}
+
+if [ "${1:-}" = stop ]; then
+  stop
+  info "止めました"
+  exit 0
+fi
+[ $# -eq 0 ] || die "使い方: voice [stop]"
+
+command -v agy >/dev/null || die "agy がありません"
+command -v herdr >/dev/null || die "herdr がありません"
+mkdir -p "$state_dir" "$log_dir"
+
+# 遠くの 24713 番から音声が届くか（ssh の転送は、先の mic-serve が止まっていても口を開けているので、バイトが来るかで見る）
+remote_audio() {
+  ssh -o ControlPath=none "$host" \
+    "timeout 2 bash -c 'exec 3<>/dev/tcp/127.0.0.1/$remote_port; cat <&3' 2>/dev/null | head -c 1 | wc -c" 2>/dev/null | tr -d ' '
+}
+
+# 1. mic-serve（ほかで動いていればそれを使い、ここで立てたものだけを後で止める）
+if ! nc -z 127.0.0.1 "$local_port" 2>/dev/null; then
+  info "agy mic-serve を立てます"
+  nohup agy mic-serve >"$log_dir/agy-mic-serve.log" 2>&1 &
+  echo $! >"$state_dir/mic-serve.pid"
+  for _ in 1 2 3 4 5 6 7 8 9 10; do
+    nc -z 127.0.0.1 "$local_port" 2>/dev/null && break
+    sleep 0.5
+  done
+  nc -z 127.0.0.1 "$local_port" 2>/dev/null || die "mic-serve が立ちません（$log_dir/agy-mic-serve.log）"
+fi
+
+# 2. マイクの転送（すでに音声が届いていれば張らない）
+if [ "$(remote_audio)" != 1 ]; then
+  kill_pidfile tunnel
+  info "マイクを $host:$remote_port に渡します"
+  ssh -N -o ControlMaster=no -o ControlPath=none -o ExitOnForwardFailure=yes \
+    -o ServerAliveInterval=15 -o ServerAliveCountMax=3 \
+    -R "$remote_port:127.0.0.1:$local_port" "$host" >"$log_dir/voice-tunnel.log" 2>&1 &
+  echo $! >"$state_dir/tunnel.pid"
+  sleep 2
+  if ! kill -0 "$(cat "$state_dir/tunnel.pid")" 2>/dev/null; then
+    rm -f "$state_dir/tunnel.pid"
+    die "転送を張れませんでした（$(tail -1 "$log_dir/voice-tunnel.log")）。古い ssh の接続が $remote_port 番を持ったままなら、ssh -O exit $host（前に使った宛先の書き方で）で閉じてから、もう一度 voice"
+  fi
+  [ "$(remote_audio)" = 1 ] || { stop; die "$host に音声が届きません。マイクの使用を許可しているか（システム設定 → プライバシーとセキュリティ → マイク）を確かめてください"; }
+fi
+
+# 3. agent-host の herdr に voice のワークスペースを開き、start を動かす（agy が終わるとワークスペースは閉じる）
+ws=$(herdr --machine "$machine" workspace create --label voice --cwd "$tool_dir" --focus)
+pane=$(printf '%s' "$ws" | python3 -c 'import json,sys; print(json.load(sys.stdin)["result"]["root_pane"]["pane_id"])')
+herdr --machine "$machine" pane run "$pane" "./start || read -rp 'Enter で閉じます'; exit" >/dev/null
+
+# 4. ワークスペースが閉じたら、転送とここで立てた mic-serve を止める
+nohup bash -c '
+  misses=0
+  while [ "$misses" -lt 3 ]; do
+    if herdr --machine "$1" pane get "$2" >/dev/null 2>&1; then misses=0; else misses=$((misses + 1)); fi
+    sleep 5
+  done
+  "$3" stop >/dev/null
+' voice-watch "$machine" "$pane" "$0" >/dev/null 2>&1 &
+echo $! >"$state_dir/watch.pid"
+
+info "agent-host の herdr に「voice」のワークスペースを開きました。話題の候補が出たら F6 で話し始めます"
+if [ "${HERDR_ENV:-}" = 1 ]; then
+  info "この herdr のサイドバー（または prefix+w）で agent-host の voice を選んでください"
+else
+  exec herdr
+fi
