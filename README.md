@@ -30,7 +30,16 @@ On macOS, run `./macos-defaults.sh` once and log in again to apply the
 system settings (Dock, Finder, trackpad, keyboard).
 
 To refresh the Brewfile after installing or removing something with Homebrew:
-`brew bundle dump --force --file=~/dev/dotfiles/Brewfile`.
+`brew bundle dump --force --file=~/dev/dotfiles/Brewfile`. The dump leaves out
+casks installed outside Homebrew; keep the hand-added `gyazo`,
+`karabiner-elements`, `logi-options+`, and `zoom` lines.
+
+Apps installed by hand, with their own installers and updaters:
+
+- Microsoft Word, Excel, PowerPoint (Microsoft AutoUpdate), Teams, OneDrive
+- Adobe Acrobat DC
+- DaVinci Resolve and Blackmagic Proxy Generator (Blackmagic Design)
+- Homedale, MochiLog
 
 ## Packages
 

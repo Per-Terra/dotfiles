@@ -124,14 +124,22 @@ cask "gimp"
 cask "google-chrome"
 # Graphically shows disk usage within a file system
 cask "grandperspective"
+# Screenshot and screen recording tool (updates itself)
+cask "gyazo"
 # Menu bar application that displays the CPU speed limit due to thermal issues
 cask "hot"
 # Vector graphics editor
 cask "inkscape"
+# Jellyfin desktop client
+cask "jellyfin-media-player"
+# Keyboard customiser (updates itself)
+cask "karabiner-elements"
 # File archiver
 cask "keka"
 # Blocks all Keyboard and TouchBar input
 cask "keyboardcleantool"
+# Software for Logitech devices (updates itself)
+cask "logi-options+"
 # Trims video and audio files losslessly
 cask "losslesscut"
 # Multi-platform web browser
@@ -230,3 +238,5 @@ vscode "tombonnike.vscode-status-bar-format-toggle"
 vscode "vue.volar"
 vscode "wraith13.external-files"
 vscode "yzhang.markdown-all-in-one"
+# Video communication and virtual meeting platform (updates itself)
+cask "zoom"
