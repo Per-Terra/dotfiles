@@ -8,13 +8,8 @@ zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 # zoxide (smarter cd command)
 (( $+commands[zoxide] )) && builtin source <(zoxide init zsh)
 
-# nvm (Node Version Manager) — 初回実行時に遅延読み込み (node の PATH は .zshenv で設定済み)
-nvm() {
-  unfunction nvm
-  [ -s "$NVM_DIR"/nvm.sh ] && \. "$NVM_DIR"/nvm.sh  # This loads nvm
-  [ -s "$NVM_DIR"/bash_completion ] && \. "$NVM_DIR"/bash_completion  # This loads nvm bash_completion
-  nvm "$@"
-}
+# mise — 対話シェルではディレクトリごとの版と環境変数を効かせる（非対話の PATH は .zshenv の shims）
+(( $+commands[mise] )) && builtin source <(mise activate zsh)
 
 # Completions — 毎回の動的生成は遅いのでキャッシュし、バイナリ更新時のみ再生成
 cache_completion() {

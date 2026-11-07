@@ -10,10 +10,6 @@ export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 # Skip eager compinit in Ubuntu's /etc/zsh/zshrc (compinit is run in deferred.zsh)
 skip_global_compinit=1
 
-# Node (nvm) — non-interactive shell でも PATH を通す
-export NVM_DIR="$XDG_CONFIG_HOME"/nvm
-[ -d "$NVM_DIR/versions/node" ] && export PATH="$(ls -d "$NVM_DIR"/versions/node/*/bin 2>/dev/null | head -1):$PATH"
-
 # 非対話シェルでも PATH を通す(重い初期化・補完は deferred.zsh で遅延読込み)
 # pnpm (Performant Node.js package manager)
 export PNPM_HOME="$XDG_DATA_HOME"/pnpm
@@ -35,6 +31,9 @@ case ":$PATH:" in
   *":$BUN_INSTALL/bin:"*) ;;
   *) export PATH="$BUN_INSTALL/bin:$PATH" ;;
 esac
+
+# mise — 非対話シェルでも道具の PATH を通す（pnpm・deno・bun のグローバルの道具より前）
+export PATH="$XDG_DATA_HOME/mise/shims:$PATH"
 
 # uv, sheldon, bat 等のバイナリ置き場
 case ":$PATH:" in

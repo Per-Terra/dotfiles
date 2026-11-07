@@ -78,39 +78,24 @@ install_prerequisites_linux() {
     curl -sS https://starship.rs/install.sh | sh -s -- --yes
   fi
 
-  # uv (Python)
-  if ! has uv; then
-    info "Installing uv..."
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-  fi
-
-  # bun
-  if ! has bun; then
-    info "Installing bun..."
-    curl -fsSL https://bun.com/install | bash
-  fi
-
-  # deno
-  if ! has deno; then
-    info "Installing deno..."
-    curl -fsSL https://deno.land/install.sh | DENO_INSTALL="$HOME/.deno" sh
-  fi
-
-  # pnpm
-  if ! has pnpm; then
-    info "Installing pnpm..."
-    curl -fsSL https://get.pnpm.io/install.sh | PNPM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm" SHELL=/dev/null sh
+  # mise: official install script (on macOS it comes from the Brewfile)
+  if ! has mise; then
+    info "Installing mise..."
+    curl -fsSL https://mise.run | sh
   fi
 }
 
-# nvm: must NOT be installed via Homebrew
-install_nvm() {
-  local nvm_dir="${XDG_CONFIG_HOME:-$HOME/.config}/nvm"
-  if [[ -s "$nvm_dir/nvm.sh" ]]; then return; fi
-  info "Installing nvm..."
-  mkdir -p "$nvm_dir"
-  export NVM_DIR="$nvm_dir"
-  PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.6/install.sh | bash'
+# Runtimes and dev CLIs declared in mise/.config/mise/config.toml, plus the
+# global JS tools: pnpm for general ones, bun for ccstatusline (statusLine runs it with bun)
+install_tools() {
+  export PATH="${XDG_DATA_HOME:-$HOME/.local/share}/mise/shims:$HOME/.local/bin:$PATH"
+  export PNPM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm"
+  export PATH="$PNPM_HOME/bin:$PATH"
+  info "Installing mise tools..."
+  mise install
+  info "Installing global JS tools..."
+  pnpm add -g defuddle
+  bun add -g ccstatusline
 }
 
 # tmux plugin manager
@@ -127,8 +112,9 @@ install_tpm() {
 
 # Note: "gh" is the stow package for GitHub CLI config (~/.config/gh/config.yml),
 # not the gh command itself (installed above via apt/brew).
-COMMON_PACKAGES=(zsh sheldon git ssh ghostty tmux ccstatusline yt-dlp husky claude gh)
-MACOS_PACKAGES=(cmux karabiner)
+COMMON_PACKAGES=(zsh sheldon git ssh ghostty tmux ccstatusline yt-dlp husky claude gh mise)
+# "voice" starts the agy voice conversation on agent-host with this Mac's mic
+MACOS_PACKAGES=(cmux karabiner voice)
 # "obsidian" is a WSL wrapper for the Windows Obsidian CLI (Obsidian.com)
 LINUX_PACKAGES=(obsidian)
 
@@ -214,7 +200,7 @@ main() {
   create_dirs
   stow_packages
   create_local_configs
-  install_nvm
+  install_tools
   install_tpm
 
   set_default_shell
