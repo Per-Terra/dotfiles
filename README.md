@@ -26,6 +26,9 @@ After installing, restart your shell. Inside tmux, press `prefix + I` to
 install tmux plugins. Sign in to the App Store before `brew bundle` so the
 `mas` lines can install.
 
+On macOS, run `./macos-defaults.sh` once and log in again to apply the
+system settings (Dock, Finder, trackpad, keyboard).
+
 To refresh the Brewfile after installing or removing something with Homebrew:
 `brew bundle dump --force --file=~/dev/dotfiles/Brewfile`.
 
